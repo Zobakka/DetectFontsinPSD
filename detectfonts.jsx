@@ -60,9 +60,22 @@ function findFonts() {
     return arrayUnique(fonts).sort();
 }
 
+function copyTextToClipboard( txt )
+{
+    const keyTextData         = app.charIDToTypeID('TxtD');
+    const ktextToClipboardStr = app.stringIDToTypeID( "textToClipboard" );
+
+    var textStrDesc = new ActionDescriptor();
+
+    textStrDesc.putString( keyTextData, txt );
+    executeAction( ktextToClipboardStr, textStrDesc, DialogModes.NO );
+}
+
 if (documents.length) {
     var d = findFonts();
-    alert(d.length + ' fonts found\n' + d.join('\n'));
+    //alert(d.length + ' fonts found\n' + d.join('\n'));
+	copyTextToClipboard(d.length + ' fonts found\n' + d.join('\n'));
 } else {
-    alert('No fonts used in the active document.');
+    //alert('No fonts used in the active document.');
+	copyTextToClipboard('No fonts used in the active document.');
 }
